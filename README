@@ -1,1 +1,15 @@
-A silly node / express demo
+A quick silly node / express demo hack
+
+
+Installation
+
+git clone git://github.com/aheckmann/tic-tac-node.git
+cd tic-tac-node
+git submodule update --init
+cd support/express
+git submodule update --init
+cd ../../
+
+
+Run it
+> node app.js
