@@ -13,38 +13,39 @@ get("/", function(){
 })
 
 
-
 var players = {}
   , chars = ["X","O"]
   , opps = {}
-  , uid = 0
-  , ready 
+  //, uid = require('express/utils').uid
+  , ready = [] 
 
 post("/available", function(){
   // when two people are available start the game
-  if (ready && ready.session && ready.session.id == this.session.id){
+  if (ready.length && ready[0].session && ready[0].session.id == this.session.id){
     log("still waiting...")
-    ready = this
+    ready = [this]
     return
   }
 
   this.session.name = this.param('uname')
 
-  if (ready){
+  if (ready.length){
+    var rdy = ready[0]
+    ready = [] 
     log("starting a game...")
-    opps[this.session.id] = ready.session.id
-    opps[ready.session.id] = this.session.id
+    opps[this.session.id] = rdy.session.id
+    opps[rdy.session.id] = this.session.id
     players[this.session.id] = { req: this, moves: [] } 
-    players[ready.session.id] = { req: ready, moves: [] }
-    ;[this, ready].forEach(function(player, i){
+    players[rdy.session.id] = { req: rdy, moves: [] }
+    ;[this, rdy].forEach(function(player, i){
       player.contentType("json")
       player.respond(200, JSON.stringify({ me: chars[i], op: chars[i===0 ? 1 : 0]}))
     })
-    ready = null
     return
   }
 
-  ready = this
+  log("ready = [this]")
+  ready = [this]
 })
 
 // post your moves here
@@ -52,7 +53,7 @@ post("/nextmove", function(){
   var cell = this.param('cell')
   if (!cell) return this.respond(204)
 
-  log(cell)
+  log(this.session.id)
   var opp = players[opps[this.session.id]]
   if (opp)
     opp.req.respond(200, cell) 
@@ -63,10 +64,11 @@ post("/nextmove", function(){
 
 // waiting for the next move
 get("/nextmove", function(){
-  players[this.session.id].req = this
   // check for new move
   var opp = players[opps[this.session.id]]
   if (opp.moves.length)
     return this.respond(200, opp.moves[0])
+  else 
+    players[this.session.id].req = this
 })
 
