@@ -5,8 +5,6 @@ var sys = require('sys')
     }
 
 
-//get("/public/*", function(){})
-
 
 get("/", function(){
   log(this.session)  
