@@ -44,16 +44,19 @@ jQuery(function(){
       { url: "/nextmove"
       , type: "post"
       , data: { cell: this.className }
+      , success: function(){
+          detectWinner()
+        }
       , error: function(){
           alert("Whooops! Please try your move again.")
           cell.text("")
         }
       })
-      detectWinner()
     })
 
     ;(function poll(){
       $.get("/nextmove", function(cell){
+        if (cell && "GAMEOVER" == cell) return
         if (cell) 
           $("td." + cell).text(opChar)
         if (!detectWinner())
@@ -113,6 +116,7 @@ jQuery(function(){
     return false
   }
   function askReplay(){
+    $.post("/gameover")
     setTimeout(function(){
       $("#replay").fadeIn(600)
     }, 4000)

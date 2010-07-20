@@ -66,9 +66,20 @@ post("/nextmove", function(){
 get("/nextmove", function(){
   // check for new move
   var opp = players[opps[this.session.id]]
+  if (!opp) return this.respond(200,"GAMEOVER")
   if (opp.moves.length)
     return this.respond(200, opp.moves[0])
   else 
     players[this.session.id].req = this
 })
 
+post("/gameover", function(){
+  var oppid = opps[this.session.id]
+    , opp = players[oppid]
+  if (opp && opp.req) opp.req.respond(200, "GAMEOVER")
+  delete players[oppid] 
+  delete opps[oppid]
+  delete players[this.session.id]
+  delete opps[this.session.id]
+  this.respond(204)
+})
