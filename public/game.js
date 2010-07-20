@@ -37,7 +37,6 @@ jQuery(function(){
 
   function init(){
     $("#board table").delegate("td", "click", function(){
-      console.log(this)  
       var cell = $(this)
       if (cell.text().length) return false
       cell.text(myChar)
@@ -55,7 +54,6 @@ jQuery(function(){
 
     ;(function poll(){
       $.get("/nextmove", function(cell){
-        console.log(cell)
         if (cell) 
           $("td." + cell).text(opChar)
         if (!detectWinner())
