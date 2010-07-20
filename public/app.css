@@ -1,0 +1,106 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* end reset */
+
+#board{
+  width: 100%;
+}
+#board-inner{
+  margin: 0 auto;
+  position: relative;
+  width: 300px;
+}
+#entername, #replay{
+  height: 300px;
+  width: 300px;
+  position: absolute;
+  background-color: #E7CD0C;
+}
+#entername form{
+  margin-left: 28px;
+  margin-top: 108px;
+}
+#replay{ display: none; }
+#replay a{
+  position: absolute;
+  font-size: 30px;
+  margin: 117px 0 0 98px;
+}
+#board table {
+  border: 4px solid #980;
+  width: 300px; height: 300px;
+}
+#board table td {
+  border: 1px solid #000;
+  cursor: pointer;
+  width: 33%; height: 33%;
+  font-size: 80px;
+  padding-left: 16px;
+  vertical-align: middle;
+}
+#board table td:hover {
+  background-color: #ffa;
+}
+#gameover{
+  height: 40px;
+  font-size: 30px;
+  text-align: center;
+  display: none;
+}
+#gameover p { display: none; }
+.winner #gameover{
+  background-color: green;
+  color: #fff;
+  display: block;
+}
+.loser #gameover{
+  background-color: red;
+  display: block;
+}
+.stalemate #gameover{ 
+  background-color: #E7CD0C;
+  display: block; 
+}
+.loser #gameover .lose{ display: block; }
+.winner #gameover .won{ display: block; }
+.stalemate #gameover .stalemate{ display: block; }
+.winner .match { color: green; }
+.loser .match {color: red; }
+.winner #board table td:hover,
+.loser #board table td:hover,
+#board .stalemate table td:hover{
+  background-color: #fff;
+  cursor: default;
+}
+#msg { position: absolute; }

@@ -1,0 +1,31 @@
+#msg
+  %span Waiting for someone to join...
+#board
+  #board-inner
+    #gameover
+      %p.won You Win!
+      %p.lose You Lose 
+      %p.stalemate STALEMATE
+    #entername
+      %form{ action:"#" }
+        %label What's your name?
+        %input#uname{ type: "text", name:"uname" }
+        %button{ type: "submit" }
+          %span Start!
+    #replay
+      %a{ href: "/" } Replay?
+    %table
+      %tbody
+        %tr
+          %td.c1 
+          %td.c2 
+          %td.c3 
+        %tr
+          %td.c4 
+          %td.c5 
+          %td.c6 
+        %tr
+          %td.c7  
+          %td.c8 
+          %td.c9 
+
