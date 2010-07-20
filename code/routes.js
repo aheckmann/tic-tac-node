@@ -27,8 +27,6 @@ post("/available", function(){
     return
   }
 
-  this.session.name = this.param('uname')
-
   if (ready.length){
     var rdy = ready[0]
     ready = [] 

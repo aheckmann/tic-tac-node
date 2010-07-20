@@ -7,11 +7,8 @@
       %p.lose You Lose 
       %p.stalemate STALEMATE
     #entername
-      %form{ action:"#" }
-        %label What's your name?
-        %input#uname{ type: "text", name:"uname" }
-        %button{ type: "submit" }
-          %span Start!
+      %img{ src: "/public/loading.gif" }
+      %p Gratuitous Waiting Animation
     #replay
       %a{ href: "/" } Replay?
     %table

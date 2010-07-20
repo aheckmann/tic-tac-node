@@ -47,9 +47,12 @@ table {
   position: absolute;
   background-color: #E7CD0C;
 }
-#entername form{
-  margin-left: 28px;
+#entername img{
+  margin-left: 110px;
   margin-top: 108px;
+}
+#entername p{
+  text-align: center;
 }
 #replay{ display: none; }
 #replay a{

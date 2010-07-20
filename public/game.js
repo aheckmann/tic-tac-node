@@ -6,33 +6,24 @@ jQuery(function(){
     , myChar
   function newgame(){
     $("#entername").show()
-    $("#entername form").submit(function(){
-      if (waiting) return false
-      var name = $("#uname")
-        , val = $.trim( name.val() )
-      if (!val) return false
-      waiting = true
-      $("#entername form button").replaceWith("<img src='/public/loading.gif'>")
-      $.ajax(
-      { url: "/available"
-      , type: "post"
-      , dataType: "json"
-      , data: { name: val }
-      , error: function(){ 
-          waiting = false
-          alert("Whooops!!")
-        }
-      , success: function(data){
-          waiting = false
-          $("#entername").hide()
-          myChar = data.me
-          opChar = data.op
-          init()
-          $("#msg").append("<p>starting game! You are " + data.me +"</p>") 
-        }
-      })
-      return false
-    })
+    setTimeout(function(){
+    $.ajax(
+    { url: "/available"
+    , type: "post"
+    , dataType: "json"
+    , error: function(){ 
+        waiting = false
+        alert("Whooops!! Something really really really bad happenend. Try refreshing the page.")
+      }
+    , success: function(data){
+        waiting = false
+        $("#entername").hide()
+        myChar = data.me
+        opChar = data.op
+        init()
+        $("#msg").append("<p>starting game! You are " + data.me +"</p>") 
+      }
+    })}, 500)
   }
 
   function init(){
