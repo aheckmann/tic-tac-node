@@ -97,8 +97,8 @@ table {
 .stalemate #gameover .stalemate{ display: block; }
 .winner .match { color: green; }
 .loser .match {color: red; }
-.winner #board table td:hover,
-.loser #board table td:hover,
+#board .winner table td:hover,
+#board .loser table td:hover,
 #board .stalemate table td:hover{
   background-color: #fff;
   cursor: default;
